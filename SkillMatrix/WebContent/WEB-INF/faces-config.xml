@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE faces-config PUBLIC
+    "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+	<!--  Facelet support - START -->
+	<application>
+		<variable-resolver>
+			org.springframework.web.jsf.DelegatingVariableResolver 
+		</variable-resolver>
+		<view-handler> 
+			com.icesoft.faces.facelets.D2DFaceletViewHandler 
+		</view-handler>
+		<state-manager> 
+			com.ibm.faces.application.DevelopmentStateManager 
+		</state-manager>
+		<property-resolver> 
+			com.ibm.faces.databind.SelectItemsPropResolver 
+		</property-resolver>
+		<variable-resolver> 
+			com.ibm.faces.databind.SelectItemsVarResolver 
+		</variable-resolver>
+		<!-- message-bundle>RateQuoteProperties</message-bundle-->
+	</application>
+	<factory>
+		<faces-context-factory> com.ibm.faces.context.AjaxFacesContextFactory 
+		</faces-context-factory>
+		<render-kit-factory> com.ibm.faces.renderkit.AjaxRenderKitFactory 
+		</render-kit-factory>
+	</factory>
+	
+	<!--  Facelet support - END -->
+
+	<managed-bean>
+		<managed-bean-name>renderManager</managed-bean-name>
+		<managed-bean-class> com.icesoft.faces.async.render.RenderManager 
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>employeeDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.EmployeeDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>employeeService</property-name>
+			<value>#{employeeServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>codesUtility</property-name>
+			<value>#{codesUtility}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>employeePersonalDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.EmployeePersonalDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>employeeService</property-name>
+			<value>#{employeeServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>competencyService</property-name>
+			<value>#{competencyServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>skillService</property-name>
+			<value>#{skillServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>employeeSkillService</property-name>
+			<value>#{employeeSkillServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>codesUtility</property-name>
+			<value>#{codesUtility}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>employeeService</property-name>
+			<value>#{employeeServiceId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>codesUtility</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.util.CodesUtility</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>competencyGroupService</property-name>
+			<value>#{competencyGroupServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>competencyService</property-name>
+			<value>#{competencyServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>skillService</property-name>
+			<value>#{skillServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>industryDomainService</property-name>
+			<value>#{industryDomainServiceId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>industryDomainDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.IndustryDomainDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>industryDomainService</property-name>
+			<value>#{industryDomainServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>codesUtility</property-name>
+			<value>#{codesUtility}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>competencyGroupDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.CompetencyGroupDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>competencyGroupService</property-name>
+			<value>#{competencyGroupServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>codesUtility</property-name>
+			<value>#{codesUtility}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>competencyService</property-name>
+			<value>#{competencyServiceId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>competencyDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.CompetencyDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>competencyService</property-name>
+			<value>#{competencyServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>codesUtility</property-name>
+			<value>#{codesUtility}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>skillService</property-name>
+			<value>#{skillServiceId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>skillDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.SkillDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>skillService</property-name>
+			<value>#{skillServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>competencyService</property-name>
+			<value>#{competencyServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>codesUtility</property-name>
+			<value>#{codesUtility}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>competencyGroupService</property-name>
+			<value>#{competencyGroupServiceId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>searchDetailsBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.SearchDetailsBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>skillService</property-name>
+			<value>#{skillServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>competencyService</property-name>
+			<value>#{competencyServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>searchService</property-name>
+			<value>#{searchServiceId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>employeeService</property-name>
+			<value>#{employeeServiceId}</value>
+		</managed-property>
+		
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>styleBean</managed-bean-name>
+		<managed-bean-class>com.sdlc.skillMatrix.web.util.StyleBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>welcome</from-outcome>
+			<to-view-id>/pages/welcome.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin</from-outcome>
+			<to-view-id>/pages/admin.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>search</from-outcome>
+			<to-view-id>/pages/search.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>employeePersonalPage</from-outcome>
+			<to-view-id>/pages/Employee/employeePersonalPage.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>allEmployees</from-outcome>
+			<to-view-id>/pages/Employee/allEmployees.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>addEditEmployee</from-outcome>
+			<to-view-id>/pages/Employee/addEditEmployee.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>allCompetencyGroups</from-outcome>
+			<to-view-id>/pages/CompetencyGroup/allCompetencyGroups.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>addEditCompetencyGroup</from-outcome>
+			<to-view-id>/pages/CompetencyGroup/addEditCompetencyGroup.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>allCompetencys</from-outcome>
+			<to-view-id>/pages/Competency/allCompetencys.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>addEditCompetency</from-outcome>
+			<to-view-id>/pages/Competency/addEditCompetency.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>allSkills</from-outcome>
+			<to-view-id>/pages/Skill/allSkills.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>addEditSkill</from-outcome>
+			<to-view-id>/pages/Skill/addEditSkill.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>domain</from-outcome>
+			<to-view-id>/pages/Domain/domainDetails.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>addEditDomain</from-outcome>
+			<to-view-id>/pages/Domain/addEditDomain.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+</faces-config>

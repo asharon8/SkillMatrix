@@ -1,0 +1,140 @@
+<!-- NOTE: Using Eclipse to auto-format this document will result in Spring 
+	failing to locate the jndi DataSource! -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+							http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd ">
+
+
+	<!-- Data Source Beans -->
+
+	<bean id="dataSourceId" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/MySQLDataSource</value>
+		</property>
+	</bean>
+
+
+	<!-- MySQL DAOs -->
+
+	<bean id="industryDomainDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.IndustryDomainDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+
+	<bean id="employeeDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.EmployeeDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+
+	<bean id="competencyGroupDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.CompetencyGroupDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+	<bean id="competencyDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.CompetencyDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+
+	<bean id="skillDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.SkillDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+
+	<bean id="employeeSkillDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.EmployeeSkillDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+
+	<bean id="searchDaoId"
+		class="com.sdlc.skillMatrix.model.dao.implementation.SearchDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceId" />
+		</property>
+	</bean>
+
+
+
+	<!-- TX Manager -->
+	<!-- <bean id="txManagerId" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		<property name="dataSource"> <ref bean="dataSourceId" /> </property> </bean> -->
+
+
+	<!-- Services -->
+
+
+	<bean id="industryDomainServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.IndustryDomainServiceImpl">
+		<property name="industryDomainDao">
+			<ref bean="industryDomainDaoId" />
+		</property>
+	</bean>
+
+	<bean id="employeeServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.EmployeeServiceImpl">
+		<property name="employeeDao">
+			<ref bean="employeeDaoId" />
+		</property>
+	</bean>
+
+	<bean id="competencyGroupServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.CompetencyGroupServiceImpl">
+		<property name="competencyGroupDao">
+			<ref bean="competencyGroupDaoId" />
+		</property>
+	</bean>
+
+	<bean id="competencyServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.CompetencyServiceImpl">
+		<property name="competencyDao">
+			<ref bean="competencyDaoId" />
+		</property>
+	</bean>
+
+	<bean id="skillServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.SkillServiceImpl">
+		<property name="skillDao">
+			<ref bean="skillDaoId" />
+		</property>
+	</bean>
+
+	<bean id="employeeSkillServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.EmployeeSkillServiceImpl">
+		<property name="employeeSkillDao">
+			<ref bean="employeeSkillDaoId" />
+		</property>
+	</bean>
+
+	<bean id="searchServiceId"
+		class="com.sdlc.skillMatrix.model.service.implementation.SearchServiceImpl">
+		<property name="searchDao">
+			<ref bean="searchDaoId" />
+		</property>
+	</bean>
+
+	<bean id="domainTest" class="com.sdlc.skillMatrix.test.DomainTest">
+		<property name="industryDomainService">
+			<ref bean="industryDomainServiceId" />
+		</property>
+	</bean>
+
+
+</beans>

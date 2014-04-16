@@ -1,0 +1,62 @@
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "facelet-taglib_1_0.dtd">
+
+<facelet-taglib xmlns="http://java.sun.com/JSF/Facelet">
+ <namespace>http://www.ibm.com/jsf/html_extended</namespace>
+
+ <tag>
+  <tag-name>scriptCollector</tag-name>
+  <component>
+   <component-type>com.ibm.faces.HtmlScriptCollector</component-type>
+   <renderer-type>com.ibm.faces.ScriptCollector</renderer-type>
+   <handler-class>com.sun.facelets.tag.jsf.html.HtmlComponentHandler</handler-class>
+  </component>
+ </tag>
+ 
+ <tag>
+  <tag-name>commandExButton</tag-name>
+  <component>
+   <component-type>com.ibm.faces.HtmlCommandExButton</component-type>
+   <renderer-type>com.ibm.faces.Button</renderer-type>
+   <handler-class>com.sun.facelets.tag.jsf.html.HtmlComponentHandler</handler-class>
+  </component>
+ </tag>
+ 
+ <tag>
+  <tag-name>panelFormBox</tag-name>
+  <component>
+   <component-type>com.ibm.faces.HtmlPanelFormBox</component-type>
+   <renderer-type>com.ibm.faces.FormBox</renderer-type>
+   <handler-class>com.sun.facelets.tag.jsf.html.HtmlComponentHandler</handler-class>
+  </component>
+ </tag> 
+
+ <tag>
+  <tag-name>panelMenu</tag-name>
+  <component>
+   <component-type>com.ibm.faces.HtmlPanelMenu</component-type>
+   <renderer-type>com.ibm.faces.Menu</renderer-type>
+   <handler-class>com.sun.facelets.tag.jsf.html.HtmlComponentHandler</handler-class>
+  </component>
+ </tag>
+
+ <tag>
+  <tag-name>outputLinkEx</tag-name>
+  <component>
+   <component-type>com.ibm.faces.HtmlOutputLinkEx</component-type>
+   <renderer-type>com.ibm.faces.LinkEx</renderer-type>
+   <handler-class>com.sun.facelets.tag.jsf.html.HtmlComponentHandler</handler-class>
+  </component>
+ </tag>
+
+ <tag>
+  <tag-name>requestLink</tag-name>
+  <component>
+   <component-type>com.ibm.faces.HtmlRequestLink</component-type>
+   <renderer-type>com.ibm.faces.Link</renderer-type>
+   <handler-class>com.sun.facelets.tag.jsf.html.HtmlComponentHandler</handler-class>
+  </component>
+ </tag>
+
+</facelet-taglib>

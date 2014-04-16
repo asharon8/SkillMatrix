@@ -1,0 +1,373 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:hx="http://www.ibm.com/jsf/html_extended"
+	xmlns:c="http://java.sun.com/jsp/jstl/core#"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>SDLC Cognos</title>
+<script>
+function mouseOverInternalLink(ref) {
+	ref.style.color = 'white'; 
+	ref.style.textDecoration = 'underline'; 
+	ref.style.backgroundColor = '#2A93D5'
+}
+
+function mouseOutInternalLink(ref) {
+	ref.style.textDecoration = 'none';
+	ref.style.backgroundColor = 'white'; 
+	ref.style.color='#2A93D5';
+}
+function mouseOverLink(ref) {
+	ref.style.textDecoration = 'none';
+	ref.style.color = 'white'; 
+	ref.style.backgroundColor = '#2A93D5'
+}
+
+function mouseOutLink(ref) {
+	ref.style.textDecoration = 'none';
+	ref.style.backgroundColor = 'white'; 
+	ref.style.color='#2A93D5';
+}
+
+</script>
+<ice:outputText escape="false" value="#{styleBean.stylePart1}#{facesContext.externalContext.requestContextPath}#{styleBean.stylePart2}"/>
+</head>
+
+<body class="Test">
+<ice:form>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="100%">
+			<table background = "../images/table_backgrd.gif" style="width:100%;height:90px;">
+				<tr>
+					<td align = "left" valign = "middle" rowspan="2" width="7%">
+						<ice:graphicImage value="/images/logo.png" style = "border:0;height:75px;width:75px"/>
+					</td>
+				</tr>
+				<tr>
+					<td align = "left" valign = "bottom">
+						<ice:outputText value ="Employee Details..!!" style="color:white;font-family:Calibri;font-size:15pt;font-weight:bold"/>
+					</td>
+					<td align = "right">
+						<table width="100%">
+							<tr>
+								<td align="right">
+									<ice:outputText value ="SDLC Skill Matrix Portal" style="color:white;font-family:Bodoni MT Poster Compressed;font-size:25pt;font-weight:bold"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align = "right">
+									<table>
+										<tr>
+											<td align = "right" valign="top">
+												<ice:graphicImage value="/images/user1.png" style = "border:0;"/>
+											</td>
+											<td align = "right" valign="middle">
+												<ice:outputText value ="#{loginBean.loginUser.firstName} #{loginBean.loginUser.lastName}" style="color:white;font-family:Calibri;font-size:9pt"/>
+											</td>
+											
+											<td align = "right" valign="top">
+												<ice:graphicImage value="/images/logout1.png" style = "border:0;"/>
+											</td>
+											<td align = "right" valign="middle">
+												<ice:commandLink value = "Logout" action ="#{loginBean.logout}" style="color:white;font-family:Calibri;font-size:9pt"/>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td width = "100%">
+			<table width = "100%">
+				<tr>
+					<td>
+						<ice:commandLink action="admin" >
+							<ice:graphicImage value="/images/goBack.gif" style = "border:0" height = "25px" width = "25px" title="Go Back"/>
+						</ice:commandLink>
+						<ice:commandLink action="#{employeeDetailsBean.addEmployeeAction}" >
+							<ice:graphicImage value="/images/add.png" height = "30px" width = "30px" style = "border:0" title="Add Employee"/>
+						</ice:commandLink>
+					</td>
+					<td align = "right" valign = "top">
+						<ice:commandLink value="Home" onmouseover="mouseOverInternalLink(this)" onmouseout="mouseOutInternalLink(this)"  
+						action="#{loginBean.homeAction}" style="font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;color:#2A93D5"/>
+						<ice:outputText  value=" | "/>
+						<ice:commandLink value="Search" onmouseover="mouseOverInternalLink(this)" onmouseout="mouseOutInternalLink(this)"  
+						action="search" style="font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;color:#2A93D5"/>
+						
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align ="center">
+			<table>
+				<tr>
+					<td align ="center">
+						<ice:dataTable id="employeeList" var="employeeList" style="empty-cells:show;width:100%"
+							value="#{employeeDetailsBean.employeeList}"  columnClasses="tableCol">
+							
+							<ice:column>
+								<f:facet name="header">
+									<table>
+										<tr>
+											<td>
+												<ice:outputText value="Employee Id" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+										</tr>
+									</table>
+								</f:facet>
+								<table>
+									<tr>
+										<td>
+											<ice:commandLink action="#{employeeList.gotoEmployeePersonalPage}" >
+												<ice:outputText id="Employee_Id" value="#{employeeList.employeeId}" />
+											</ice:commandLink>
+										</td>
+										<td>
+											<ice:graphicImage  url="/images/active.png" style = "border:0;height:25px;width:25px" title="SDLC Employee"
+												rendered = "#{employeeList.sdlcEmployee == 'Y'}"/>
+										</td>
+										
+									</tr>
+								</table>
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table width = "200px" >
+										<tr>
+											<td align = "center" >
+												<ice:outputText value="Employee Name" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table width = "200px"  >
+									<tr>
+										<td align = "center" >
+											<ice:commandLink action="#{employeeList.gotoEmployeePersonalPage}" >
+												<ice:outputText id="Employee_Name" value="#{employeeList.firstName} #{employeeList.lastName}" 
+												onmouseover="mouseOverLink(this)" onmouseout="mouseOutLink(this)" style = "color:#2A93D5"/>
+											</ice:commandLink>
+										</td>
+									</tr>
+								</table>
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table >
+										<tr>
+											
+											<td align = "center" width = "100px">
+												<ice:outputText value=" Phone #" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "100px"  >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_Phone" value="#{employeeList.phone}" />
+										</td>
+									</tr>
+								</table>
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table >
+										<tr>
+											
+											<td align = "center" width = "200px">
+												<ice:outputText value="Employee Email " style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "200px" >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_Email" value="#{employeeList.email}" />
+										</td>
+									</tr>
+								</table>
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table>
+										<tr>
+											
+											<td align = "center" width = "100px">
+												<ice:outputText value="Employee Type " style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "100px" >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_Type" value="#{employeeList.employeeTypeDescription}" />
+										</td>
+									</tr>
+								</table>
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table>
+										<tr>
+											
+											<td align = "center" width = "100px">
+												<ice:outputText value=" Role " style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "100px" >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_Role" value="#{employeeList.employeeRoleDescription}" />
+										</td>
+									</tr>
+								</table>
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table>
+										<tr>
+											
+											<td align = "center" width = "100px">
+												<ice:outputText value=" Hiring Date " style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "100px" >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_Hire_Date" value="#{employeeList.employeeHireDate}" />
+										</td>
+									</tr>
+								</table>
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table>
+										<tr>
+											
+											<td align = "center" width = "70px">
+												<ice:outputText value="In Project" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "70px" >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_In_Project" value="#{employeeList.employeeInProject}" />
+										</td>
+									</tr>
+								</table>
+								
+								
+							</ice:column>
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table>
+										<tr>
+											
+											<td align = "center" width = "150px">
+												<ice:outputText value="Employee Work Location" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<table align = "center" width = "150px" >
+									<tr>
+										<td align = "center" >
+											<ice:outputText id="Employee_Work_location" value="#{employeeList.employeeWorkLocation}" />
+										</td>
+									</tr>
+								</table>
+								
+								
+							</ice:column>
+							
+							
+							
+							<ice:column>
+								
+								<f:facet name="header">
+									<table>
+										<tr>
+											
+											<td align = "center">
+												<ice:outputText value="Actions" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+											</td> 
+											
+										</tr>
+									</table>
+								</f:facet>
+								<ice:commandLink action="#{employeeList.inactivate}">
+									<ice:graphicImage  url="/images/delete.png" style = "border:0;height:25px;width:25px" title="Delete This Employee"/>
+								</ice:commandLink>
+								<ice:commandLink action="#{employeeList.editEmployeeAction}">
+									<ice:graphicImage  url="/images/edit.png" style = "border:0;height:25px;width:25px"  title="Edit This Employee"/>
+								</ice:commandLink>
+							</ice:column>
+							
+							
+						</ice:dataTable>
+						
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+	
+</table>
+</ice:form>
+
+</body>
+</html>

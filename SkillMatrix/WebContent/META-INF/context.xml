@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+   		
+   		 
+   	<Resource name="jdbc/MySQLDataSource" 
+   		auth="Container" 
+   		type="javax.sql.DataSource" 
+   		username="root"
+   		password=""
+   		driverClassName="com.mysql.jdbc.Driver"
+   		url="jdbc:mysql://localhost:3306/test"/>
+<!--   		
+   		<Resource name="jdbc/MySQLDataSource" 
+   		auth="Container" 
+   		type="javax.sql.DataSource" 
+   		username="yash"
+   		password="Abcd1234"
+   		driverClassName="com.mysql.jdbc.Driver"
+   		url="jdbc:mysql://173.203.89.69:3306/coee_dev_db"/>
+-->
+</Context>
+
+

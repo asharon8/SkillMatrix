@@ -1,0 +1,494 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:hx="http://www.ibm.com/jsf/html_extended"
+	xmlns:c="http://java.sun.com/jsp/jstl/core#"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>SDLC Skill Matrix</title>
+<script>
+function mouseOverInternalLink(ref) {
+	ref.style.color = 'white'; 
+	ref.style.textDecoration = 'underline'; 
+	ref.style.backgroundColor = '#2A93D5'
+}
+
+function mouseOutInternalLink(ref) {
+	ref.style.textDecoration = 'none';
+	ref.style.backgroundColor = 'white'; 
+	ref.style.color='#2A93D5';
+}
+</script>
+<ice:outputText escape="false" value="#{styleBean.stylePart1}#{facesContext.externalContext.requestContextPath}#{styleBean.stylePart2}"/>
+</head>
+
+<body class="Test">
+<ice:form>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="100%">
+			<table background = "../images/table_backgrd.gif" style="width:100%;height:90px;" border="0">
+				<tr>
+					<td align = "left" valign = "middle" rowspan="2" width="7%">
+						<ice:graphicImage value="/images/logo.png" style = "border:0;height:75px;width:75px"/>
+					</td>
+				</tr>
+				<tr>
+					<td align = "left" valign = "bottom">
+						<ice:outputText value ="Welcome..!! " style="color:white;font-family:Calibri;font-size:15pt;font-weight:bold"/>
+					</td>
+					<td align = "right">
+						<table width="100%">
+							<tr>
+								<td align="right">
+									<ice:outputText value ="SDLC Skill Matrix Portal" style="color:white;font-family:Bodoni MT Poster Compressed;font-size:25pt;font-weight:bold"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align = "right">
+									<table>
+										<tr>
+											<td align = "right" valign="top">
+												<ice:graphicImage value="/images/user1.png" style = "border:0;"/>
+											</td>
+											<td align = "right" valign="middle">
+												<ice:outputText value ="#{loginBean.loginUser.firstName} #{loginBean.loginUser.lastName}" style="color:white;font-family:Calibri;font-size:9pt"/>
+											</td>
+											
+											<td align = "right" valign="top">
+												<ice:graphicImage value="/images/logout1.png" style = "border:0;"/>
+											</td>
+											<td align = "right" valign="middle">
+												<ice:commandLink value = "Logout" action ="#{loginBean.logout}" style="color:white;font-family:Calibri;font-size:9pt"/>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td width = "100%">
+			<table width = "100%">
+				<tr>
+					<td>
+						<ice:commandLink action="#{employeePersonalDetailsBean.returnToBackPage}" 
+						rendered = "#{employeePersonalDetailsBean.loginUser.employeeRole == '1' || employeePersonalDetailsBean.loginUser.employeeRole == '3'}">
+							<ice:graphicImage value="/images/goBack.gif" style = "border:0" height = "25px" width = "25px" title="Go Back"/>
+						</ice:commandLink>
+					</td>
+					<td align = "right">
+					
+						<ice:commandLink value="Home" onmouseover="mouseOverInternalLink(this)" onmouseout="mouseOutInternalLink(this)"  
+						action="#{loginBean.homeAction}" style="font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;color:#2A93D5"
+						rendered = "#{employeePersonalDetailsBean.loginUser.employeeRole == '1' || employeePersonalDetailsBean.loginUser.employeeRole == '3'}" />
+						
+						<ice:outputText  value=" | " 
+						rendered = "#{employeePersonalDetailsBean.loginUser.employeeRole ==  '1' || employeePersonalDetailsBean.loginUser.employeeRole == '3'}"/>
+						
+						<ice:commandLink value="Admin" onmouseover="mouseOverInternalLink(this)" onmouseout="mouseOutInternalLink(this)"  
+						action="admin" style="font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;color:#2A93D5"
+						rendered = "#{employeePersonalDetailsBean.loginUser.employeeRole ==  '3'}"/>
+						
+						<ice:outputText  value=" | "
+						rendered = "#{employeePersonalDetailsBean.loginUser.employeeRole ==  '3'}"/>
+						
+						<ice:commandLink value="Search" onmouseover="mouseOverInternalLink(this)" onmouseout="mouseOutInternalLink(this)"  
+						action="#{searchDetailsBean.init}" style="font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;color:#2A93D5"
+						rendered = "#{employeePersonalDetailsBean.loginUser.employeeRole == '1' || employeePersonalDetailsBean.loginUser.employeeRole == '3'}"/>
+					
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td height = "2px">
+		
+		</td>
+	</tr>
+	<tr>
+		<td align = "center">
+			<table width = "100%" border = "1">
+				<tr>
+					<td width = "100%" align = "center">
+						<table width = "100%" align = "center" style="font-family:Calibri;font-size:10pt;">
+							<tr>
+								<td colspan = "5">
+									<table width = "100%" style="background-color: #e1e8ff;">
+										<tr>
+											<td>
+												<ice:graphicImage value="/images/loginUser.png" style = "border:0" />
+												<h:outputText value ="Personal Details" style="font-family:Arial,sans-serif;font-size:12pt;font-weight:bold;color:#2A93D5"/>
+											</td>
+											<td align= "right">
+												<ice:commandLink id="editUser" action="#{employeePersonalDetailsBean.editEmployeePersonalDetailAction}" > 
+													<ice:graphicImage value="/images/editUser.png" style = "border:0;" title = "Edit Personal Details"/>
+												</ice:commandLink>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width = "20%">
+									<h:outputText value ="First Name : " />
+								</td>
+								<td  width = "25%" >					
+									<h:outputText value ="#{employeePersonalDetailsBean.employee.firstName}"  />
+								</td>
+								<td width = "5%">
+								
+								</td>
+								<td width = "20%">
+									<h:outputText value ="Last Name : " />
+								</td>
+								<td width = "30%" >					
+									<h:outputText value ="#{employeePersonalDetailsBean.employee.lastName}"  />
+								</td>
+							</tr>
+							<tr>
+								<td width = "20%">
+									<h:outputText value ="Employee Phone # :" />
+								</td>
+								<td width = "25%" >					
+									<h:outputText value ="#{employeePersonalDetailsBean.employee.phone}"  />
+								</td>
+								<td width = "5%">
+								
+								</td>
+								<td width = "20%">
+									<h:outputText value ="Employee Email Id : " />
+								</td>
+								<td width = "30%" >					
+									<h:outputText value ="#{employeePersonalDetailsBean.employee.email}"  />
+								</td>
+							</tr>
+							<tr>
+								<td width = "20%">
+									<h:outputText value ="SDLC Employee :" />
+								</td>
+								<td width = "25%" >					
+									<h:outputText  value="#{employeePersonalDetailsBean.employee.sdlcEmployee}" />
+								</td>
+								<td width = "5%">
+								
+								</td>
+								<td width = "20%">
+									<h:outputText value ="Employee Type :" />
+								</td>
+								<td width = "30%" >					
+									<h:outputText  value="#{employeePersonalDetailsBean.employee.employeeTypeDescription}" />
+								</td>
+							</tr>
+							<tr>
+								<td width = "20%">
+									<h:outputText value ="Employee Hiring Date :" />
+								</td>
+								<td width = "25%" >					
+									<h:outputText  value="#{employeePersonalDetailsBean.employee.employeeHireDate}" />
+								</td>
+								<td width = "5%">
+								
+								</td>
+								<td width = "20%">
+									<h:outputText value ="In Project ?" />
+								</td>
+								<td width = "30%" >					
+									<h:outputText  value="#{employeePersonalDetailsBean.employee.employeeInProject}" />
+								</td>
+							</tr>
+							<tr>
+								<td width = "20%">
+									<h:outputText value ="Employee Work Location :" />
+								</td>
+								<td width = "25%" >
+									<h:outputText value ="#{employeePersonalDetailsBean.employee.employeeWorkLocation}"  />
+								</td>
+								<td width = "5%">
+								
+								</td>
+								<td width = "20%">
+									<h:outputText value ="Project End Date" />
+								</td>
+								<td width = "30%" >					
+									<h:outputText  value="#{employeePersonalDetailsBean.employee.employeeProjectEndDate}" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align = "center">
+			<table width = "100%" border = "1">
+				<tr>
+					<td width = "100%">
+						<table width = "100%">
+							<tr>
+								<td width = "100%">
+									<table width = "100%" align = "center" style="background-color: #e1e8ff;">
+										<tr>
+											<td >
+												<ice:graphicImage value="/images/skill.png" style = "border:0;height:40px;width:40px;" />
+												<h:outputText value ="Skill Details" style="font-family:Arial,sans-serif;font-size:12pt;font-weight:bold;color:#2A93D5"/>
+											</td>
+											<td align= "right" >
+												<ice:commandLink id="addSkill" action="#{employeePersonalDetailsBean.enableSkillSelectionAction}" > 
+													<ice:graphicImage value="/images/addSkills.png" style = "border:0;" title = "Add New Skills"/>
+												</ice:commandLink>
+											</td>
+										</tr>
+										
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width = "100%" align = "center">
+									<table border = "1" width = "100%">
+										<tr>
+											<td>
+												<ice:panelGroup rendered= "#{employeePersonalDetailsBean.skillSelectionMode}">
+													<table width = "100%" align = "center">
+														<tr>
+															<td width = "25%" align = "center" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold">
+																<h:outputText value ="Competency Group" />
+															</td>
+															<td width = "25%" align = "center" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold">
+																<h:outputText value ="Competency" />
+															</td>
+															<td width = "25%" align = "center" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold">
+																<h:outputText value ="Skill Name" />
+															</td>
+														</tr>
+														<tr>
+															<td align = "center">
+																<h:selectOneMenu  value="#{employeePersonalDetailsBean.competencyGroupId}" style="background-color: #e1e8ff;"
+																onblur = "iceSubmit(form,this,event)" valueChangeListener="#{employeePersonalDetailsBean.getAllCompetencyByCompetencyGroupId}" partialSubmit="true" >
+																	<f:selectItems value = "#{codesUtility.competencyGroupCodes}"/>
+																</h:selectOneMenu>
+															</td>
+															<td align = "center">					
+																<h:selectOneMenu  value="#{employeePersonalDetailsBean.competencyId}" style="background-color: #e1e8ff;"
+																onblur = "iceSubmit(form,this,event)" valueChangeListener="#{employeePersonalDetailsBean.getAllSkillByCompetencyId}" partialSubmit="true" >
+																	<f:selectItems value = "#{employeePersonalDetailsBean.competencyCodes}"/>
+																</h:selectOneMenu>
+															</td>
+															<td align = "center">
+																<h:selectOneMenu  value="#{employeePersonalDetailsBean.skillId}" style="background-color: #e1e8ff;">
+																	<f:selectItems value = "#{employeePersonalDetailsBean.skillCodes}"/>
+																</h:selectOneMenu>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<ice:commandLink id="hideSeletionSection" action="#{employeePersonalDetailsBean.disableSkillSelectionAction}" > 
+																	<ice:graphicImage value="/images/up.png" style = "border:0;height:32px;width:32px" title = "Hide this Section"/>
+																</ice:commandLink>
+															</td>
+															<td colspan = "2" align= "right" >
+																<ice:commandLink id="addSelectedSkill" action="#{employeePersonalDetailsBean.addSelectedSkillAction}" > 
+																	<ice:graphicImage value="/images/addThisSkill.png" style = "border:0;height:30px;width:30px" title = "Add this Skill"/>
+																</ice:commandLink>
+															</td>
+														</tr>
+													</table>
+												</ice:panelGroup>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<ice:dataTable id="allEmployeeSkillList" var="allEmployeeSkillList" style="empty-cells:show;width:100%"
+										value="#{employeePersonalDetailsBean.allEmployeeSkillList}" >
+										
+										<ice:column>
+											
+											<f:facet name="header">
+												<table width = "165px" align = "center" >
+													<tr>
+														<td align = "center">
+															<ice:outputText value="Skill Name" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+													</tr>
+												</table>
+											</f:facet>
+											<table width = "165px" align = "center">
+												<tr>
+													<td align = "center">
+														<ice:outputText id="Skill_Id" value="#{allEmployeeSkillList.skillName}" />
+													</td>
+												</tr>
+											</table>
+											
+										</ice:column>
+										<ice:column>
+											
+											<f:facet name="header">
+												<table  width = "165px" align = "center" >
+													<tr>
+														<td align = "center">
+															<ice:outputText value="Domain Id" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+													</tr>
+												</table>
+											</f:facet>
+											<table  width = "165px" align = "center">
+												<tr>
+													<td align = "center">
+														<h:selectOneMenu  value="#{allEmployeeSkillList.domainId}" style="background-color: #e1e8ff;">
+															<f:selectItems value = "#{codesUtility.domainCodes}"/>
+														</h:selectOneMenu>
+													</td>
+												</tr>
+											</table>
+											
+										</ice:column>
+										
+										<ice:column>
+											
+											<f:facet name="header">
+												<table width = "165px"  align = "center" >
+													<tr>
+														<td align = "center">
+															<ice:outputText value="Proficiency" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+													</tr>
+												</table>
+											</f:facet>
+											<table  width = "165px" align = "center">
+												<tr>
+													<td align = "center">
+														<h:selectOneMenu  value="#{allEmployeeSkillList.proficiency}" style="background-color: #e1e8ff;">
+															<f:selectItems value = "#{codesUtility.proficiencyCodes}"/>
+														</h:selectOneMenu>
+													</td>
+												</tr>
+											</table>
+											
+										</ice:column>
+										
+										<ice:column>
+											
+											<f:facet name="header">
+												<table  width = "165px" align = "center" >
+													<tr>
+														<td align = "center">
+															<ice:outputText value="Experience" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+													</tr>
+												</table>
+											</f:facet>
+											<table  width = "165px" align = "center">
+												<tr>
+													<td align = "center">
+														<h:selectOneMenu  value="#{allEmployeeSkillList.experience}" style="background-color: #e1e8ff;">
+															<f:selectItems value = "#{codesUtility.experienceCodes}"/>
+														</h:selectOneMenu>
+													</td>
+												</tr>
+											</table>
+											
+										</ice:column>
+										
+										<ice:column>
+											
+											<f:facet name="header">
+												<table width = "165px"  align = "center" >
+													<tr>
+														<td align = "center">
+															<ice:outputText value="Recency" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+													</tr>
+												</table>
+											</f:facet>
+											<table  width = "165px" align = "center">
+												<tr>
+													<td align = "center">
+														<h:selectOneMenu  value="#{allEmployeeSkillList.recency}" style="background-color: #e1e8ff;">
+															<f:selectItems value = "#{codesUtility.recencyCodes}"/>
+														</h:selectOneMenu>
+													</td>
+												</tr>
+											</table>
+											
+										</ice:column>
+										
+										<ice:column>
+											
+											<f:facet name="header">
+												<table  width = "165px" align = "center" >
+													<tr>
+														<td align = "center">
+															<ice:outputText value="Comments" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+													</tr>
+												</table>
+											</f:facet>
+											<table  width = "165px" align = "center">
+												<tr>
+													<td align = "center">
+														<ice:inputText value="#{allEmployeeSkillList.comments}" style="background-color: #e1e8ff;"/>
+													</td>
+												</tr>
+											</table>
+											
+										</ice:column>
+										
+										<ice:column>
+											
+											<f:facet name="header">
+												<table  width = "165px" >
+													<tr>
+														
+														<td align = "center">
+															<ice:outputText value="Actions" style="color:#2A93D5;font-family:Arial,sans-serif;font-size:8pt;font-weight:bold"/>
+														</td> 
+														
+													</tr>
+												</table>
+											</f:facet>
+											<table width = "165px" align="center">
+												<tr>
+													<td align="center">
+														<ice:commandLink action="#{allEmployeeSkillList.inactivateEmployeeSkillAction}"  >
+															<ice:graphicImage  url="/images/delete.png" style = "border:0;height:25px;width:25px" title="Delete This Skill "/>
+														</ice:commandLink>
+														<ice:commandLink action="#{allEmployeeSkillList.editEmployeeSkillAction}">
+															<ice:graphicImage  url="/images/edit.png" style = "border:0;height:25px;width:25px"  title="Update This Skill "/>
+														</ice:commandLink>
+													</td>
+												</tr>
+											</table>
+										</ice:column>
+										
+										
+										
+										
+									</ice:dataTable>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+</table>
+</ice:form>
+
+</body>
+</html>
